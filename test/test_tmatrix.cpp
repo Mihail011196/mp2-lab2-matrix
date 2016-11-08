@@ -2,56 +2,66 @@
 
 #include <gtest.h>
 
-TEST(TMatrix, can_create_matrix_with_positive_length)
+TEST (TMatrix, can_create_matrix_with_positive_length)
 {
-  ASSERT_NO_THROW(TMatrix<int> m(5));
+  ASSERT_NO_THROW (TMatrix <int> m (5));
 }
 
-TEST(TMatrix, cant_create_too_large_matrix)
+TEST (TMatrix, cant_create_too_large_matrix)
 {
-  ASSERT_ANY_THROW(TMatrix<int> m(MAX_MATRIX_SIZE + 1));
+  ASSERT_ANY_THROW (TMatrix <int> m (MAX_MATRIX_SIZE + 1));
 }
 
-TEST(TMatrix, throws_when_create_matrix_with_negative_length)
+TEST (TMatrix, throws_when_create_matrix_with_negative_length)
 {
-  ASSERT_ANY_THROW(TMatrix<int> m(-5));
+  ASSERT_ANY_THROW (TMatrix <int> m (-5));
 }
 
-TEST(TMatrix, can_create_copied_matrix)
+TEST (TMatrix, can_create_copied_matrix)
 {
-  TMatrix<int> m(5);
-
-  ASSERT_NO_THROW(TMatrix<int> m1(m));
+  TMatrix <int> m (5);
+  ASSERT_NO_THROW (TMatrix <int> m1 (m));
 }
 
-TEST(TMatrix, copied_matrix_is_equal_to_source_one)
+TEST (TMatrix, copied_matrix_is_equal_to_source_one)
 {
-  ADD_FAILURE();
+  TMatrix <int> m (5); 
+  m[0][0] = 1; 
+  TMatrix <int> m1 (m); 
+  EXPECT_EQ (m, m1); 
 }
 
-TEST(TMatrix, copied_matrix_has_its_own_memory)
+TEST (TMatrix, copied_matrix_has_its_own_memory)
 {
-  ADD_FAILURE();
+  TMatrix <int> m (5);
+  TMatrix <int> m1 (m);
+    m [0][0] = 1; 
+    EXPECT_NE (m [0][0], m1 [0][0]); 
 }
 
 TEST(TMatrix, can_get_size)
 {
-  ADD_FAILURE();
+  TMatrix <int> m (5); 
+  EXPECT_EQ (5, m.GetSize ()); 
 }
 
-TEST(TMatrix, can_set_and_get_element)
+TEST (TMatrix, can_set_and_get_element)
 {
-  ADD_FAILURE();
+  TMatrix <int> m (5); 
+  m [0][1] = 1; 
+  EXPECT_EQ (1, m [0][1]); 
 }
 
-TEST(TMatrix, throws_when_set_element_with_negative_index)
+TEST (TMatrix, throws_when_set_element_with_negative_index)
 {
-  ADD_FAILURE();
+  TMatrix <int> m (5); 
+  ASSERT_ANY_THROW (m [0][-1]); 
 }
 
-TEST(TMatrix, throws_when_set_element_with_too_large_index)
+TEST (TMatrix, throws_when_set_element_with_too_large_index)
 {
-  ADD_FAILURE();
+  TMatrix <int> m (5); 
+    ASSERT_ANY_THROW (m [0][5]); 
 }
 
 TEST(TMatrix, can_assign_matrix_to_itself)
